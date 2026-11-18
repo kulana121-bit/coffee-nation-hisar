@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coffee Nation Hisar</title>
+    <meta name="theme-color" content="#0b0907" />
+    <link rel="stylesheet" href="hark.css" />
+    <style>
+      :root {
+        --x-bg: #0b0907;
+        --x-bg-2: #15110d;
+        --x-cream: #f3e9dc;
+        --x-dim: rgba(243, 233, 220, 0.62);
+        --x-faint: rgba(243, 233, 220, 0.2);
+        --x-line: rgba(243, 233, 220, 0.14);
+        --x-gold: #c8955a;
+        --x-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --x-ease: cubic-bezier(0.22, 1, 0.36, 1);
+        color-scheme: dark;
+      }
+      body { background: var(--x-bg); color: var(--x-cream); font-family: var(--x-font); }
+      .x-site {
+        width: 100vw;
+        margin: -12px 0 -40px calc(50% - 50vw);
+        overflow: clip;
+        font-family: var(--x-font);
+        color: var(--x-cream);
+        background: var(--x-bg);
+        -webkit-font-smoothing: antialiased;
+      }
+      .x-site a:focus-visible, .x-scroller:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 3px; }
+      .x-wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+      /* Nav */
+      .x-nav {
+        position: fixed; inset: 0 0 auto 0; z-index: 50;
+        background: rgba(11, 9, 7, 0.62);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid var(--x-line);
+      }
+      .x-nav__in { display: flex; align-items: center; gap: 20px; height: 56px; width: min(1120px, 100% - 32px); margin-inline: auto; }
+      .x-mark { display: inline-flex; align-items: center; min-height: 44px; font-size: 17px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; margin-right: auto; }
+      .x-mark span { color: var(--x-gold); margin-left: 0.25em; }
+      .x-nav__links { display: flex; gap: 10px; }
+      .x-nav__links a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 6px; font-size: 13px; color: var(--x-dim); text-decoration: none; transition: color 0.2s; }
+      .x-nav__links a:hover { color: var(--x-cream); }
+      .x-pill {
+        display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px;
+        background: var(--x-gold); color: #1a120a; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap;
+      }
+      @media (max-width: 460px) {
+        .x-nav__in { gap: 6px; width: calc(100% - 24px); }
+        .x-mark { font-size: 15px; }
+        .x-nav__links { gap: 0; }
+        .x-nav__links a { font-size: 12px; padding: 0 4px; }
+        .x-pill { padding: 0 12px; font-size: 12px; }
+      }
+
+      /* Buttons */
+      .x-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+      .x-btn {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px;
+        border-radius: 999px; font-size: 16px; font-weight: 500; text-decoration: none;
+        transition: transform 0.3s var(--x-ease), background 0.3s, color 0.3s;
+      }
+      .x-btn--fill { background: var(--x-gold); color: #1a120a; }
+      .x-btn--fill:hover { background: #d8a46a; }
+      .x-btn--line { border: 1px solid rgba(243, 233, 220, 0.4); color: var(--x-cream); }
+      .x-btn--line:hover { background: var(--x-cream); color: var(--x-bg); }
+      .x-btn:active { transform: scale(0.97); }
+
+      /* Type */
+      .x-eyebrow { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--x-gold); }
+      .x-h2 { font-size: clamp(40px, 7vw, 88px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; }
+      .x-lede { font-size: clamp(18px, 2.2vw, 24px); line-height: 1.4; color: var(--x-dim); max-width: 36ch; font-weight: 500; }
+      .x-small { font-size: 13px; color: var(--x-dim); }
+      .x-block { padding-block: clamp(96px, 16vw, 180px); }
+      .x-block__head { display: grid; gap: 16px; margin-bottom: clamp(40px, 6vw, 72px); }
+
+      /* Hero */
+      .x-hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; }
+      .x-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transform: scale(1.06); will-change: transform; }
+      .x-hero::after {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(11, 9, 7, 0.55) 0%, rgba(11, 9, 7, 0.2) 35%, rgba(11, 9, 7, 0.75) 72%, var(--x-bg) 100%);
+      }
+      .x-hero__copy {
+        position: absolute; inset: auto 0 0 0; z-index: 2; padding-bottom: clamp(56px, 10vh, 112px);
+        display: grid; gap: 20px; justify-items: center; text-align: center; will-change: transform, opacity;
+      }
+      .x-hero h1 { font-size: clamp(60px, 13vw, 168px); font-weight: 700; letter-spacing: -0.05em; line-height: 0.95; }
+      .x-hero h1 span { color: var(--x-gold); }
+      .x-hero__sub { font-size: clamp(17px, 2.2vw, 24px); font-weight: 500; color: var(--x-cream); opacity: 0.86; }
+      .x-chip {
+        display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+        background: rgba(11, 9, 7, 0.78); color: var(--x-cream); border: 1px solid rgba(243, 233, 220, 0.22);
+        -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      }
+      .x-chip b { color: var(--x-gold); }
+      .x-hero .x-btns { justify-content: center; margin-top: 8px; }
+
+      /* Exploded view */
+      .x-explode { position: relative; height: 320vh; }
+      .x-explode__stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: visible; }
+      .x-glow {
+        position: absolute; left: var(--cx, 50%); top: 54%; width: 96vmin; height: 96vmin; transform: translate(-50%, -50%);
+        background: radial-gradient(closest-side, rgba(200, 149, 90, 0.34), rgba(200, 149, 90, 0.08) 55%, transparent 75%);
+        opacity: 0.45; pointer-events: none; will-change: opacity, transform;
+      }
+      .x-layer { position: absolute; left: 0; top: 0; will-change: transform; pointer-events: none; user-select: none; }
+      .x-layer { overflow: visible; }
+      .x-layer img { display: block; width: 100%; height: auto; max-width: none; max-height: none; overflow: visible; -webkit-mask: none; mask: none; clip-path: none; }
+      .x-layer--saucer { z-index: 1; filter: drop-shadow(0 0 2px rgba(232, 190, 140, 0.55)) drop-shadow(0 0 22px rgba(200, 149, 90, 0.45)) drop-shadow(0 26px 36px rgba(0, 0, 0, 0.55)); }
+      .x-layer--cup { z-index: 2; filter: drop-shadow(0 0 2px rgba(232, 190, 140, 0.4)) drop-shadow(0 0 26px rgba(200, 149, 90, 0.32)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55)); }
+      .x-layer--espresso { z-index: 3; filter: drop-shadow(0 0 2px rgba(232, 190, 140, 0.45)) drop-shadow(0 0 30px rgba(200, 149, 90, 0.38)) drop-shadow(0 14px 26px rgba(0, 0, 0, 0.5)); }
+      .x-layer--foam { z-index: 4; filter: drop-shadow(0 0 2px rgba(232, 190, 140, 0.4)) drop-shadow(0 0 28px rgba(200, 149, 90, 0.3)) drop-shadow(0 14px 24px rgba(0, 0, 0, 0.5)); }
+      .x-callout {
+        position: absolute; top: 0; z-index: 6; display: flex; align-items: center; gap: 12px; opacity: 0;
+        width: max-content; max-width: min(300px, 40vw); will-change: opacity, transform;
+      }
+      .x-callout__line { flex: none; width: 56px; height: 1px; background: rgba(243, 233, 220, 0.55); transform-origin: left center; }
+      .x-callout--left { flex-direction: row-reverse; text-align: right; }
+      .x-callout--left .x-callout__line { transform-origin: right center; }
+      .x-callout p { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+      .x-callout small { display: block; font-size: 14px; font-weight: 400; color: var(--x-dim); margin-top: 3px; }
+      @media (max-width: 700px) {
+        .x-callout { gap: 8px; }
+        .x-callout__line { width: 14px; }
+        .x-callout p { font-size: 13px; }
+        .x-callout small { font-size: 12px; }
+      }
+      .x-explode__title, .x-explode__end {
+        position: absolute; inset: 84px 0 auto 0; z-index: 7; text-align: center; display: grid; gap: 10px; padding-inline: 20px; will-change: opacity, transform;
+      }
+      .x-explode__end { inset: auto 0 9vh 0; opacity: 0; }
+      .x-explode__title h2, .x-explode__end h2 { font-size: clamp(32px, 5.4vw, 64px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; }
+      .x-explode__end h2 span { color: var(--x-gold); }
+
+      /* Statement */
+      .x-statement { position: relative; height: 240vh; }
+      .x-statement__stick { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; align-items: center; }
+      .x-statement p { font-size: clamp(34px, 6.2vw, 80px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.08; }
+      .x-word { color: #77706a; transition: color 0.35s ease; }
+      .x-word.is-on { color: var(--x-cream); }
+      .x-word.is-gold.is-on { color: var(--x-gold); }
+
+      /* Gallery */
+      .x-scroller {
+        display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 400px); gap: 20px;
+        overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+        padding-inline: max(20px, (100vw - 1120px) / 2); scroll-padding-inline: max(20px, (100vw - 1120px) / 2);
+        padding-bottom: 8px;
+      }
+      .x-scroller::-webkit-scrollbar { display: none; }
+      .x-shot { margin: 0; scroll-snap-align: start; }
+      .x-shot__frame { aspect-ratio: 3 / 4; border-radius: 28px; overflow: hidden; background: var(--x-bg-2); }
+      .x-shot img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.22); opacity: 0.4; transition: transform 1.6s var(--x-ease), opacity 1.2s ease; }
+      .x-shot.is-in img { transform: scale(1); opacity: 1; }
+      .x-shot figcaption { margin-top: 18px; font-size: clamp(19px, 2vw, 24px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+      .x-shot figcaption small { display: block; font-size: 14px; font-weight: 400; color: var(--x-dim); margin-top: 4px; letter-spacing: 0; }
+
+      /* Menu */
+      .x-menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 20px; }
+      .x-food { margin: 0; }
+      .x-food__frame { aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; background: var(--x-bg-2); border: 1px solid var(--x-line); }
+      .x-food__frame img {
+        display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; transform: scale(1.14);
+        transition: transform 1.4s var(--x-ease);
+      }
+      .x-food.is-in .x-food__frame img { transform: scale(1); }
+      .x-food.is-in:hover .x-food__frame img { transform: scale(1.06); transition-duration: 0.8s; }
+      .x-food__tag { margin-top: 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--x-gold); }
+      .x-food h3 { margin-top: 6px; font-size: clamp(20px, 2vw, 24px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+      .x-food p.x-food__desc { font-size: 15px; color: var(--x-dim); margin-top: 6px; line-height: 1.4; }
+      .x-also { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--x-line); font-size: clamp(16px, 1.8vw, 19px); font-weight: 500; color: var(--x-cream); letter-spacing: -0.01em; }
+      .x-also span { color: var(--x-gold); margin-right: 8px; }
+      .x-menu-note { margin-top: 24px; }
+
+      /* Proof */
+      .x-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; border-block: 1px solid var(--x-line); padding-block: 48px; }
+      .x-stat { display: grid; gap: 8px; text-align: center; }
+      .x-stat__fig { font-size: clamp(48px, 9vw, 112px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+      .x-stat__fig span { color: var(--x-gold); }
+      .x-stat__label { font-size: clamp(14px, 1.6vw, 17px); color: var(--x-dim); font-weight: 500; }
+      @media (max-width: 600px) { .x-stats { grid-template-columns: 1fr; gap: 40px; } }
+      .x-quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; margin-top: 56px; }
+      .x-quote { margin: 0; padding: 32px; border-radius: 28px; background: var(--x-bg-2); border: 1px solid var(--x-line); display: grid; gap: 20px; align-content: space-between; }
+      .x-quote blockquote { margin: 0; font-size: clamp(20px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+      .x-quote figcaption { font-size: 14px; color: var(--x-gold); }
+
+      /* Visit */
+      .x-visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 64px); align-items: stretch; }
+      @media (max-width: 860px) { .x-visit { grid-template-columns: 1fr; } }
+      .x-facts { display: grid; gap: 0; margin: 0 0 32px; }
+      .x-facts div { padding-block: 20px; border-top: 1px solid var(--x-line); display: grid; gap: 6px; }
+      .x-facts dt { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--x-gold); }
+      .x-facts dd { margin: 0; font-size: 19px; line-height: 1.4; font-weight: 500; }
+      .x-facts dd a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-decoration-color: var(--x-faint); text-underline-offset: 4px; }
+      .x-map { position: relative; display: block; border-radius: 28px; overflow: hidden; border: 1px solid var(--x-line); min-height: 320px; background: var(--x-bg-2); text-decoration: none; }
+      .x-map img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform 1s var(--x-ease); }
+      .x-map:hover img { transform: scale(1.03); }
+      .x-map__pill {
+        position: absolute; left: 16px; bottom: 16px; z-index: 1; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+        border-radius: 999px; background: rgba(11, 9, 7, 0.78); color: var(--x-cream); border: 1px solid rgba(243, 233, 220, 0.22);
+        font-size: 14px; font-weight: 600; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      }
+      .x-map:hover .x-map__pill { background: var(--x-gold); color: #1a120a; }
+
+      /* Footer */
+      .x-foot { border-top: 1px solid var(--x-line); padding-block: 40px 56px; }
+      .x-foot .x-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: baseline; }
+      .x-foot p { font-size: 14px; color: var(--x-dim); }
+      .x-foot p + p { font-size: 12px; }
+
+      /* Reveal */
+      .x-rise { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1.2s var(--x-ease); }
+      .x-rise.is-in { opacity: 1; transform: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .x-rise, .x-shot img, .x-food__frame img, .x-food.is-in:hover .x-food__frame img, .x-map:hover img { opacity: 1; transform: none; transition: none; }
+        .x-word { transition: none; }
+        .x-btn { transition: none; }
+        .x-explode { height: auto; }
+        .x-explode__stick { position: relative; height: 100vh; min-height: 680px; }
+        .x-statement { height: auto; }
+        .x-statement__stick { position: relative; height: auto; padding-block: 140px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <div class="x-site">
+        <header class="x-nav">
+          <div class="x-nav__in">
+            <a class="x-mark" href="#top">Coffee <span>Nation</span></a>
+            <nav class="x-nav__links" aria-label="Sections">
+              <a href="#experience">Experience</a>
+              <a href="#menu">Menu</a>
+              <a href="#visit">Visit</a>
+            </nav>
+            <a class="x-pill" href="tel:+919728555099">Call now</a>
+          </div>
+        </header>
+
+        <main>
+          <section class="x-hero" aria-label="Coffee Nation">
+            <img class="x-hero__img" src="c1.jpg" alt="The Coffee Nation counter and seating in PLA Market, Hisar" />
+            <div class="x-hero__copy x-wrap">
+              <span class="x-chip"><b>★ 4.7</b> · 1,292 Google reviews</span>
+              <h1>Coffee, <span>crafted.</span></h1>
+              <p class="x-hero__sub">Hisar's favourite cappuccino bar · PLA Market</p>
+              <div class="x-btns">
+                <a class="x-btn x-btn--fill" href="#menu">See the menu</a>
+                <a class="x-btn x-btn--line" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20Nation%20PLA%20Sirsa%20Rd%20Hisar" target="_blank" rel="noopener">Get directions</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="x-explode" id="craft" aria-label="Anatomy of a Coffee Nation cappuccino">
+            <div class="x-explode__stick">
+              <div class="x-glow"></div>
+              <div class="x-explode__title">
+                <p class="x-eyebrow">The cappuccino</p>
+                <h2>Four layers. One perfect cup.</h2>
+              </div>
+              <div class="x-layer x-layer--saucer" data-layer="saucer"><img src="coffee_saucer.png" alt="" /></div>
+              <div class="x-layer x-layer--cup" data-layer="cup"><img src="coffee_cup_cream.png" alt="" /></div>
+              <div class="x-layer x-layer--espresso" data-layer="espresso"><img src="coffee_espresso.png" alt="" /></div>
+              <div class="x-layer x-layer--foam" data-layer="foam"><img src="coffee_foam.png" alt="" /></div>
+              <div class="x-callout" data-for="foam"><span class="x-callout__line"></span><p>Silky microfoam<small>Hand-poured rosetta</small></p></div>
+              <div class="x-callout" data-for="espresso"><span class="x-callout__line"></span><p>Double-shot espresso<small>Rich golden crema</small></p></div>
+              <div class="x-callout" data-for="cup"><span class="x-callout__line"></span><p>Glazed ceramic<small>Holds the heat longer</small></p></div>
+              <div class="x-callout" data-for="saucer"><span class="x-callout__line"></span><p>Served with care<small>Since day one</small></p></div>
+              <div class="x-explode__end">
+                <h2>Assembled. <span>Served.</span></h2>
+              </div>
+            </div>
+          </section>
+
+          <section class="x-statement" aria-label="What we serve">
+            <div class="x-statement__stick">
+              <div class="x-wrap">
+                <p id="x-statement">Hazelnut cappuccinos. Double-shot espressos. White-sauce pasta. Brownies with ice cream. All in one warm corner of PLA Market.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="x-block" id="experience" aria-labelledby="exp-h">
+            <div class="x-wrap x-block__head x-rise">
+              <p class="x-eyebrow">The experience</p>
+              <h2 class="x-h2" id="exp-h">Stay a while.</h2>
+              <p class="x-lede">A first-floor hideaway on Sirsa Road, made for long conversations and second cups.</p>
+            </div>
+            <div class="x-scroller" tabindex="0" aria-label="Photos of Coffee Nation, scroll sideways">
+              <figure class="x-shot">
+                <div class="x-shot__frame"><img src="c3.jpg" alt="The Coffee Nation storefront and sign" /></div>
+                <figcaption>Books on the shelf, music in the air<small>The storefront, PLA Market</small></figcaption>
+              </figure>
+              <figure class="x-shot">
+                <div class="x-shot__frame"><img src="c4.jpg" alt="Two cappuccinos with latte art beside grilled sandwiches" loading="lazy" /></div>
+                <figcaption>Latte art, every single cup<small>Cappuccinos and grilled sandwiches</small></figcaption>
+              </figure>
+              <figure class="x-shot">
+                <div class="x-shot__frame"><img src="c2.jpg" alt="A serving of peri-peri fries" loading="lazy" /></div>
+                <figcaption>Comfort food that hits the spot<small>Peri-peri fries</small></figcaption>
+              </figure>
+              <figure class="x-shot">
+                <div class="x-shot__frame"><img src="m_books.jpg" alt="The Coffee Nation sign above a wall of bookshelves" loading="lazy" /></div>
+                <figcaption>Coffee Nation — books on the wall, coffee in hand<small>The reading wall</small></figcaption>
+              </figure>
+              <figure class="x-shot">
+                <div class="x-shot__frame"><img src="m_mural.jpg" alt="Wall mural titled A Journey from Bean to Cup" loading="lazy" /></div>
+                <figcaption>A journey from bean to cup<small>The mural inside</small></figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="x-block" id="menu" aria-labelledby="menu-h">
+            <div class="x-wrap">
+              <div class="x-block__head x-rise">
+                <p class="x-eyebrow">Menu highlights</p>
+                <h2 class="x-h2" id="menu-h">The house favourites.</h2>
+              </div>
+              <div class="x-menu">
+                <article class="x-food">
+                  <div class="x-food__frame"><img src="m_cappuccino_pasta.jpg" alt="Hazelnut cappuccino with latte art, beside a cold coffee and pasta" loading="lazy" /></div>
+                  <p class="x-food__tag">Signature</p>
+                  <h3>Hazelnut Cappuccino</h3><p class="x-food__desc">The cup Hisar keeps coming back for.</p>
+                </article>
+                <article class="x-food">
+                  <div class="x-food__frame"><img src="m_coldcoffee.jpg" alt="Cold coffee frappe with chocolate drizzle" loading="lazy" /></div>
+                  <p class="x-food__tag">Coffee</p>
+                  <h3>Cold Coffee</h3><p class="x-food__desc">Thick, chilled, made for Hisar summers.</p>
+                </article>
+                <article class="x-food">
+                  <div class="x-food__frame"><img src="m_pasta.jpg" alt="White sauce penne pasta" loading="lazy" /></div>
+                  <p class="x-food__tag">Kitchen</p>
+                  <h3>White Cheese Pasta</h3><p class="x-food__desc">Creamy white sauce, generous cheese.</p>
+                </article>
+                <article class="x-food">
+                  <div class="x-food__frame"><img src="m_sandwich.jpg" alt="Grilled club sandwich triangles" loading="lazy" /></div>
+                  <p class="x-food__tag">Kitchen</p>
+                  <h3>Grilled Sandwich</h3><p class="x-food__desc">Pressed hot and golden.</p>
+                </article>
+                <article class="x-food">
+                  <div class="x-food__frame"><img src="m_fries.jpg" alt="Peri-peri fries" loading="lazy" /></div>
+                  <p class="x-food__tag">Kitchen</p>
+                  <h3>Peri-Peri Fries</h3><p class="x-food__desc">Crisp, spiced, impossible to share.</p>
+                </article>
+              </div>
+              <p class="x-also x-rise"><span>Also loved:</span>Double Shot Espresso · Brownie with Ice Cream · Hot Chocolate</p>
+              <p class="x-small x-menu-note">Ask in-store for today's prices.</p>
+            </div>
+          </section>
+
+          <section class="x-block" id="reviews" aria-labelledby="rev-h">
+            <div class="x-wrap">
+              <div class="x-block__head x-rise">
+                <p class="x-eyebrow">Loved in Hisar</p>
+                <h2 class="x-h2" id="rev-h">The numbers speak.</h2>
+              </div>
+              <div class="x-stats">
+                <div class="x-stat"><span class="x-stat__fig"><b data-count="4.7" data-dec="1">4.7</b><span>★</span></span><span class="x-stat__label">Google rating</span></div>
+                <div class="x-stat"><span class="x-stat__fig"><b data-count="1292">1,292</b><span>+</span></span><span class="x-stat__label">Reviews</span></div>
+                <div class="x-stat"><span class="x-stat__fig"><b data-count="7">7</b></span><span class="x-stat__label">Open 7 days</span></div>
+              </div>
+              <div class="x-quotes">
+                <figure class="x-quote x-rise"><blockquote>“The hazelnut cappuccino is the best in Hisar.”</blockquote><figcaption>Google review</figcaption></figure>
+                <figure class="x-quote x-rise"><blockquote>“Cozy interiors, books and great music — perfect to sit for hours.”</blockquote><figcaption>Google review</figcaption></figure>
+                <figure class="x-quote x-rise"><blockquote>“Great pasta and brownie, friendly staff.”</blockquote><figcaption>Google review</figcaption></figure>
+              </div>
+              <p class="x-small x-menu-note">Quotes paraphrase common themes in Google reviews.</p>
+            </div>
+          </section>
+
+          <section class="x-block" id="visit" aria-labelledby="visit-h">
+            <div class="x-wrap">
+              <div class="x-block__head x-rise">
+                <p class="x-eyebrow">Visit</p>
+                <h2 class="x-h2" id="visit-h">Come say hello.</h2>
+              </div>
+              <div class="x-visit">
+                <div class="x-rise">
+                  <dl class="x-facts">
+                    <div><dt>Address</dt><dd>Shop no. 99, First floor, SCO 99, Sirsa Rd, above Pizza Wings, PLA, Hisar, Haryana 125001</dd></div>
+                    <div><dt>Hours</dt><dd>Open daily, 9 AM – 10 PM</dd></div>
+                    <div><dt>Phone</dt><dd><a href="tel:+919728555099">+91 97285 55099</a></dd></div>
+                  </dl>
+                  <div class="x-btns">
+                    <a class="x-btn x-btn--fill" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20Nation%20PLA%20Sirsa%20Rd%20Hisar" target="_blank" rel="noopener">Get directions</a>
+                    <a class="x-btn x-btn--line" href="https://wa.me/919728555099" target="_blank" rel="noopener">WhatsApp</a>
+                  </div>
+                </div>
+                <a class="x-map x-rise" href="https://www.google.com/maps/search/?api=1&amp;query=Coffee%20Nation%20PLA%20Sirsa%20Rd%20Hisar" target="_blank" rel="noopener" aria-label="Open Coffee Nation in Google Maps">
+                  <img src="coffee_nation_map.jpg" alt="Map of Coffee Nation on Sirsa Road, PLA, Hisar" loading="lazy" />
+                  <span class="x-map__pill">Open in Google Maps ↗</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="x-foot">
+          <div class="x-wrap">
+            <p>© 2026 Coffee Nation, Hisar</p>
+            <p>Demo concept website</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="hark.js"></script>
+    <script>
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+        var smooth = function (a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+        var lerp = function (a, b, t) { return a + (b - a) * t; };
+
+        /* Statement words */
+        var st = document.getElementById("x-statement");
+        var words = st.textContent.trim().split(/\s+/);
+        var goldFrom = words.indexOf("All");
+        st.innerHTML = words.map(function (w, i) {
+          return '<span class="x-word' + (i >= goldFrom ? " is-gold" : "") + '">' + w + "</span>";
+        }).join(" ");
+        var wordEls = [].slice.call(st.querySelectorAll(".x-word"));
+
+        /* Reveal on view */
+        var rise = [].slice.call(document.querySelectorAll(".x-rise, .x-shot, .x-food"));
+        var counters = [].slice.call(document.querySelectorAll("[data-count]"));
+        function fmt(v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString("en-IN"); }
+        function countUp(el) {
+          var to = parseFloat(el.getAttribute("data-count")), dec = +el.getAttribute("data-dec") || 0, t0 = null;
+          function tick(t) {
+            if (!t0) t0 = t;
+            var k = clamp((t - t0) / 1600, 0, 1), e = 1 - Math.pow(1 - k, 3);
+            el.textContent = fmt(to * e, dec);
+            if (k < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+        if (reduce || !("IntersectionObserver" in window)) {
+          rise.forEach(function (el) { el.classList.add("is-in"); });
+          wordEls.forEach(function (el) { el.classList.add("is-on"); });
+        } else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+            });
+          }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+          rise.forEach(function (el) { io.observe(el); });
+          var cio = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) { countUp(en.target); cio.unobserve(en.target); }
+            });
+          }, { threshold: 0.6 });
+          counters.forEach(function (el) { el.textContent = fmt(0, +el.getAttribute("data-dec") || 0); cio.observe(el); });
+        }
+
+        /* Hero */
+        var hero = document.querySelector(".x-hero"), heroImg = hero.querySelector(".x-hero__img"), heroCopy = hero.querySelector(".x-hero__copy");
+
+        /* Exploded view */
+        var ex = document.querySelector(".x-explode");
+        var glow = ex.querySelector(".x-glow"), title = ex.querySelector(".x-explode__title"), end = ex.querySelector(".x-explode__end");
+        // w: width as a share of W; ar: image height/width; a: assembled y (x W); e: exploded y (x S); dx: x offset (x W)
+        var spec = {
+          saucer:   { w: 1.25, ar: 1, a: 0.27, e: 0.35, dx: 0, rot: 40, tilt: 64, s: 1.02, side: "left" },
+          cup:      { w: 1, ar: 587 / 892, a: 0, e: 0.09, dx: 0.1, rot: -4, tilt: 0, s: 1.0, side: "right" },
+          espresso: { w: 0.74, ar: 548 / 1044, a: -0.2, e: -0.16, dx: 0, rot: 5, tilt: 0, s: 1.05, side: "left" },
+          foam:     { w: 0.68, ar: 409 / 733, a: -0.24, e: -0.39, dx: 0, rot: -7, tilt: 0, s: 1.06, side: "right" }
+        };
+        var order = ["foam", "espresso", "cup", "saucer"];
+        var layers = {}, callouts = {};
+        [].forEach.call(ex.querySelectorAll(".x-layer"), function (el) { layers[el.getAttribute("data-layer")] = el; });
+        [].forEach.call(ex.querySelectorAll(".x-callout"), function (el) { callouts[el.getAttribute("data-for")] = el; });
+
+        var vw, vh, W, S, cx, cy, mobile;
+        function layout() {
+          vw = document.documentElement.clientWidth;
+          vh = window.innerHeight;
+          mobile = vw < 700;
+          W = mobile ? Math.min(vw * 0.44, vh * 0.3) : Math.min(vw * 0.32, vh * 0.34, 420);
+          S = Math.min(vh * 0.74, W * 2.9);
+          cx = mobile ? vw * 0.36 : vw * 0.5;
+          cy = vh * 0.55;
+          glow.style.setProperty("--cx", cx + "px");
+          order.forEach(function (k) {
+            var sp = spec[k], el = layers[k], c = callouts[k];
+            el.style.width = W * sp.w + "px";
+            var side = mobile ? "right" : sp.side;
+            c.classList.toggle("x-callout--left", side === "left");
+            c.dataset.side = side;
+            var halfW = k === "cup" ? W * 0.5 : (W * sp.w) / 2;
+            var gap = mobile ? 4 : 18;
+            if (side === "right") {
+              c.style.left = cx + W * sp.dx + halfW + gap + "px"; c.style.right = "auto";
+              c.style.maxWidth = mobile ? Math.max(110, vw - (cx + W * sp.dx + halfW + gap) - 10) + "px" : "";
+            } else {
+              c.style.right = vw - (cx - halfW - gap) + "px"; c.style.left = "auto"; c.style.maxWidth = "";
+            }
+          });
+        }
+
+        function renderExplode() {
+          var r = ex.getBoundingClientRect();
+          if (r.bottom < -50 || r.top > vh + 50) return;
+          var p = reduce ? 0.5 : clamp(-r.top / (r.height - vh), 0, 1);
+          var e = smooth(0.08, 0.4, p) * (1 - smooth(0.66, 0.9, p));
+          order.forEach(function (k, i) {
+            var sp = spec[k];
+            var y = lerp(sp.a * W, sp.e * S, e);
+            var h = W * sp.w * sp.ar;
+            var s = lerp(1, sp.s, e);
+            var tf = "translate3d(" + (cx + W * sp.dx - (W * sp.w) / 2) + "px," + (cy + y - h / 2) + "px,0) scale(" + s + ")";
+            if (sp.tilt) tf += " rotateX(" + sp.tilt + "deg)";
+            tf += " rotate(" + sp.rot * e + "deg)";
+            layers[k].style.transform = tf;
+            var c = callouts[k];
+            var o = reduce ? 1 : smooth(0.3 + i * 0.04, 0.42 + i * 0.04, p) * (1 - smooth(0.6, 0.68, p));
+            var lineY = cy + sp.e * S;
+            c.style.opacity = o;
+            c.style.top = lineY + "px";
+            c.style.transform = "translate3d(" + (c.dataset.side === "left" ? -1 : 1) * (1 - o) * 16 + "px,-50%,0)";
+          });
+          glow.style.opacity = 0.4 + e * 0.6;
+          glow.style.transform = "translate(-50%,-50%) scale(" + (0.9 + e * 0.25) + ")";
+          var to = reduce ? 1 : 1 - smooth(0.06, 0.2, p);
+          title.style.opacity = to;
+          title.style.transform = "translateY(" + (1 - to) * -30 + "px)";
+          var eo = reduce ? 0 : smooth(0.86, 0.96, p);
+          end.style.opacity = eo;
+          end.style.transform = "translateY(" + (1 - eo) * 30 + "px)";
+        }
+
+        function render() {
+          ticking = false;
+          if (!reduce) {
+            var hr = hero.getBoundingClientRect();
+            if (hr.bottom > 0) {
+              var t = clamp(-hr.top / hr.height, 0, 1);
+              heroImg.style.transform = "translate3d(0," + t * hr.height * 0.25 + "px,0) scale(" + (1.06 + t * 0.14) + ")";
+              heroCopy.style.opacity = 1 - smooth(0, 0.6, t);
+              heroCopy.style.transform = "translate3d(0," + t * -80 + "px,0)";
+            }
+            var sr = st.closest(".x-statement").getBoundingClientRect();
+            if (sr.bottom > 0 && sr.top < vh) {
+              var sp = clamp((-sr.top + vh * 0.3) / (sr.height - vh * 0.7), 0, 1);
+              var lit = Math.round(sp * wordEls.length * 1.1);
+              wordEls.forEach(function (w, i) { w.classList.toggle("is-on", i < lit); });
+            }
+          }
+          renderExplode();
+        }
+
+        var ticking = false, lastW = 0;
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
+        function onResize() {
+          var w = document.documentElement.clientWidth;
+          if (w === lastW && Math.abs(window.innerHeight - vh) < 120) return;
+          lastW = w; layout(); render();
+        }
+        layout(); lastW = vw; render();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize);
+        window.addEventListener("load", function () { layout(); render(); });
+      })();
+    </script>
+  </body>
+</html>
