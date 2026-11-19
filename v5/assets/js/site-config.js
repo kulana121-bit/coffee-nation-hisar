@@ -1,5 +1,5 @@
 /* =====================================================================
-   COFFEE NATION HISAR — SITE CONFIG (the one file to edit)
+   BIG MUGS HISAR — SITE CONFIG (the one file to edit)
    ---------------------------------------------------------------------
    Everything the owner may need to change lives here: business details,
    menu items and prices, approvals and form settings.
@@ -19,29 +19,30 @@ window.CN_APPROVALS = {
 };
 
 /* ---- Business details ------------------------------------------------
-   Source: Google Business listing for Coffee Nation, Hisar
-   (place_id ChIJyTAz4TozEjkRh9YzoET2vck), read on 2026-11-19, data as of 2026-11-05.
-   See OWNER-APPROVAL.md for conflicts that still need the owner's answer. */
+   Source: Google Maps listing for Big Mugs, Hisar — live check 19 Nov 2026
+   (rating 4.4 / 984 reviews; phone shown on Maps). No Google place_id on file,
+   so Maps links use a name search. Photos are the previous cafe's — swap in
+   Big Mugs photos when available. Prices below are DEMO/illustrative. */
 window.CN_BUSINESS = {
-  name: "Coffee Nation",
+  name: "Big Mugs",
   city: "Hisar",
-  phoneDisplay: "+91 97285 55099",
-  phoneE164: "+919728555099",
-  whatsapp: "919728555099",          // wa.me number: country code + number, digits only
-  email: "coffeenationhisar@gmail.com",
-  instagram: "https://www.instagram.com/coffeenationofficial/",
-  instagramHandle: "@coffeenationofficial",
-  addressLine: "Shop no. 99, SCO 99, PLA Market, Sirsa Road, Hisar, Haryana 125001",
-  floorNote: "",                     // e.g. "First floor, above Pizza Wings" — once the owner confirms
-  hoursDisplay: "Open daily, 9 AM – 10 PM",
-  opens: "09:00", closes: "22:00",
+  phoneDisplay: "+91 90508 88854",
+  phoneE164: "+919050888854",
+  whatsapp: "919050888854",          // wa.me number: country code + number, digits only
+  email: "",
+  instagram: "https://www.instagram.com/bigmugsindia/",
+  instagramHandle: "@bigmugsindia",
+  addressLine: "DSS-24-25, PLA Shopping Complex, behind Indian Petroleum Pump, Hisar, Haryana 125001",
+  floorNote: "",                     // e.g. "First floor" — once the owner confirms
+  hoursDisplay: "Open daily, 10 AM – 10 PM",
+  opens: "10:00", closes: "22:00",
   lastReservation: "21:30",
-  googlePlaceId: "ChIJyTAz4TozEjkRh9YzoET2vck",
-  lat: 29.1445664, lng: 75.7279071,
+  googlePlaceId: "",
+  lat: 29.1435919, lng: 75.7289797,
   /* Google rating snapshot. Ratings move: refresh before launch and keep asOf honest.
      Set show:false to hide it everywhere. Never added to structured data (Google ignores
      self-published review stars for local businesses, and they go stale). */
-  rating: { show: true, value: "4.7", count: "1,292", asOf: "5 Nov 2026" }
+  rating: { show: true, value: "4.4", count: "984", asOf: "19 Nov 2026" }
 };
 
 /* ---- Menu --------------------------------------------------------------
@@ -53,26 +54,30 @@ window.CN_BUSINESS = {
    Items with `note` are information rows (no price, not orderable). */
 window.CN_MENU = [
   { id: "cappuccino",   name: "Cappuccino",             cat: "Hot Coffee",       price: 149, priceStatus: "demo", photo: "cappuccino", bestseller: true,  desc: "Espresso under steamed milk and a cap of microfoam." },
-  { id: "hazelnut-cap", name: "Hazelnut Cappuccino",    cat: "Hot Coffee",       price: 169, priceStatus: "demo", photo: null,         bestseller: true,  desc: "The cappuccino, with hazelnut." },
-  { id: "latte",        name: "Latte",                  cat: "Hot Coffee",       price: 159, priceStatus: "demo", photo: null,         bestseller: false, desc: "Espresso with more steamed milk and a thin layer of foam." },
-  { id: "mocha",        name: "Mocha",                  cat: "Hot Coffee",       price: 179, priceStatus: "demo", photo: null,         bestseller: false, desc: "Espresso, chocolate and steamed milk." },
+  { id: "hot-choc",     name: "Hot Chocolate",          cat: "Hot Coffee",       price: 159, priceStatus: "demo", photo: null,         bestseller: false, desc: "Rich, warm, and made for slow evenings." },
   { id: "double-esp",   name: "Double Shot Espresso",   cat: "Hot Coffee",       price: 119, priceStatus: "demo", photo: "espresso",   bestseller: false, desc: "Two shots, short and strong." },
-  { id: "cold-coffee",  name: "Cold Coffee",            cat: "Cold Coffee",      price: 149, priceStatus: "demo", photo: "coldcoffee", bestseller: true,  desc: "Coffee blended cold with milk, served tall." },
+  { id: "latte",        name: "Latte",                  cat: "Hot Coffee",       price: 159, priceStatus: "demo", photo: null,         bestseller: false, desc: "Espresso with more steamed milk and a thin layer of foam." },
+  { id: "cold-coffee",  name: "Cold Coffee",            cat: "Cold Coffee",      price: 149, priceStatus: "demo", photo: null,         bestseller: false, desc: "Coffee blended cold with milk, served tall." },
   { id: "iced-coffee",  name: "Iced Coffee",            cat: "Cold Coffee",      price: 139, priceStatus: "demo", photo: null,         bestseller: false, desc: "Coffee poured over ice." },
-  { id: "nation",       name: "Nation Coffee",          cat: "Signature Drinks", price: 189, priceStatus: "demo", photo: null,         bestseller: false, desc: "The house signature. Ask the counter what goes in it." },
+  { id: "kitkat-shake", name: "Kitkat Shake",           cat: "Shakes",           price: 189, priceStatus: "demo", photo: "coldcoffee", bestseller: true,  desc: "Chocolate, crunch, and a tall cold glass." },
   { id: "tea",          name: "Tea",                    cat: "Tea",              price: null, note: "Today's teas — price to be confirmed. Ask the counter or on WhatsApp." },
-  { id: "shakes",       name: "Shakes",                 cat: "Shakes",           price: null, note: "Today's shakes — price to be confirmed. Ask the counter or on WhatsApp." },
-  { id: "pasta",        name: "White Sauce Pasta",      cat: "Food & Desserts",  price: 229, priceStatus: "demo", photo: "pasta",      bestseller: true,  desc: "Penne in a creamy white sauce." },
+  { id: "arrabbiata",   name: "Arrabbiata Pasta",       cat: "Food & Desserts",  price: 229, priceStatus: "demo", photo: "pasta",      bestseller: true,  desc: "Spicy tomato, tossed fresh to order." },
+  { id: "aglio-olio",   name: "Aglio Olio",             cat: "Food & Desserts",  price: 219, priceStatus: "demo", photo: null,         bestseller: false, desc: "Garlic, olive oil, and a gentle chilli kick." },
+  { id: "paneer-stick", name: "Paneer Stick with Mushroom", cat: "Food & Desserts", price: 179, priceStatus: "demo", photo: null,    bestseller: false, desc: "Crisp outside, soft inside." },
   { id: "grilled-sw",   name: "Grilled Sandwich",       cat: "Food & Desserts",  price: 149, priceStatus: "demo", photo: "sandwich",   bestseller: false, desc: "Toasted on the grill and cut in half." },
   { id: "fries",        name: "Peri-Peri Fries",        cat: "Food & Desserts",  price: 119, priceStatus: "demo", photo: "fries",      bestseller: false, desc: "Fries tossed in peri-peri seasoning." },
   { id: "brownie",      name: "Brownie with Ice Cream", cat: "Food & Desserts",  price: 149, priceStatus: "demo", photo: "brownie",    bestseller: true,  desc: "A brownie with a scoop of ice cream." },
   { id: "veg-sw",       name: "Veg Sandwich",           cat: "Food & Desserts",  price: 129, priceStatus: "demo", photo: null,         bestseller: false, desc: "A vegetable sandwich." }
 ];
-window.CN_CATEGORIES = ["All", "Hot Coffee", "Cold Coffee", "Signature Drinks", "Tea", "Shakes", "Food & Desserts"];
+window.CN_CATEGORIES = ["All", "Hot Coffee", "Cold Coffee", "Shakes", "Food & Desserts", "Tea"];
 
 /* ---- Testimonials -------------------------------------------------------
    Real, permitted guest quotes only: { quote: "…", name: "…" }. Empty hides the block. */
-window.CN_TESTIMONIALS = [];
+window.CN_TESTIMONIALS = [
+  { quote: "One of the best food ever had", name: "Twilight Perk" },
+  { quote: "Atmosphere is chill and cool and the staff is also really friendly.", name: "Riddhi Agarwal" },
+  { quote: "So Big mugs had relaunched their outlet with the mesmerizing interiors and the food is now more tastier than before.", name: "Pooja Dhingra" }
+];
 
 /* ---- Contact form -------------------------------------------------------
    endpoint: the serverless function path. Leave as is on Vercel or Netlify.

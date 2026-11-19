@@ -1,4 +1,4 @@
-/* Coffee Nation Hisar — site behaviour. Content and prices live in site-config.js. */
+/* Big Mugs Hisar — site behaviour. Content and prices live in site-config.js. */
 (function () {
   "use strict";
   document.body.classList.remove("no-js");
@@ -29,7 +29,7 @@
   var live = $("#live");
   function announce(msg) { live.textContent = ""; setTimeout(function () { live.textContent = msg; }, 30); }
   if (location.search.indexOf("debug") > -1 || /localhost|127\.0\.0\.1/.test(location.hostname)) {
-    if (!APPROVE.prices) console.info("[Coffee Nation] DEMO prices in use — owner approval pending (see OWNER-APPROVAL.md).");
+    if (!APPROVE.prices) console.info("[Big Mugs] DEMO prices in use — owner approval pending (see OWNER-APPROVAL.md).");
   }
 
   /* ---------- Business details: one source of truth ---------- */
@@ -157,7 +157,7 @@
       var p = el("p", "", item.note); p.style.marginTop = "4px"; d.appendChild(p);
       li.appendChild(d);
       var a = el("a", "tlink", "Ask on WhatsApp");
-      a.href = waUrl("Hi Coffee Nation, what " + item.name.toLowerCase() + " do you have today, and what are the prices?");
+      a.href = waUrl("Hi Big Mugs, what " + item.name.toLowerCase() + " do you have today, and what are the prices?");
       a.target = "_blank"; a.rel = "noopener";
       a.setAttribute("aria-label", "Ask about today's " + item.name.toLowerCase() + " on WhatsApp (opens in a new tab)");
       li.appendChild(a);
@@ -305,7 +305,7 @@
     var ls = lines(), t = totals();
     var type = ($("input[name=otype]:checked") || {}).value || "Dine-in";
     var name = $("#o-name").value.trim().slice(0, 60);
-    var out = ["Hi Coffee Nation! I'd like to place an order from your website.", ""];
+    var out = ["Hi Big Mugs! I'd like to place an order from your website.", ""];
     out.push("Order type: " + type);
     if (name) out.push("Name: " + name);
     out.push("");
@@ -385,7 +385,7 @@
     chk(rTime, !time ? (date === n.date && rTime.options.length < 2 ? "No times left today. Please choose another date." : "Choose a time.") : (tm < OPEN || tm > LAST) ? "Choose a time between " + fmtTime(OPEN) + " and " + fmtTime(LAST) + "." : (date === n.date && tm < n.mins + LEAD) ? "That time has passed. Choose a later time." : "");
     chk(rGuests, !guests ? "Choose the number of guests." : "");
     if (!ok) { st.className = "status bad"; st.textContent = "Please fix the highlighted fields."; first.focus(); return; }
-    var msg = "Hi Coffee Nation! I'd like to request a table.\n\nName: " + name + "\nMobile: " + phone + "\nDate: " + fmtDate(date) + "\nTime: " + fmtTime(tm) + "\nGuests: " + (guests === "13+" ? "More than 12" : guests) + (rf.note.value.trim() ? "\nNote: " + rf.note.value.trim().slice(0, 300) : "") + "\n\nPlease let me know if this table is available.";
+    var msg = "Hi Big Mugs! I'd like to request a table.\n\nName: " + name + "\nMobile: " + phone + "\nDate: " + fmtDate(date) + "\nTime: " + fmtTime(tm) + "\nGuests: " + (guests === "13+" ? "More than 12" : guests) + (rf.note.value.trim() ? "\nNote: " + rf.note.value.trim().slice(0, 300) : "") + "\n\nPlease let me know if this table is available.";
     var url = openWA(msg);
     st.className = "status ok"; st.innerHTML = "";
     st.appendChild(document.createTextNode("Your request is ready in WhatsApp. Press send there. This is not a booking yet: your table is held only when the cafe replies to confirm. "));
@@ -480,7 +480,7 @@
   $("#mapLoad").addEventListener("click", function () {
     var fr = document.createElement("iframe");
     fr.src = "https://www.google.com/maps?q=" + BIZ.lat + "," + BIZ.lng + "&z=17&output=embed";
-    fr.title = "Interactive map of Coffee Nation, Hisar";
+    fr.title = "Interactive map of Big Mugs, Hisar";
     fr.loading = "lazy";
     fr.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
     var box = $("#mapBox"); box.innerHTML = ""; box.appendChild(fr);
