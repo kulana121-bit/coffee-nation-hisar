@@ -1,5 +1,4 @@
+# PRE-LAUNCH: the whole site is blocked until the owner approves launch.
+# `npm run set-domain` + `npm run prelaunch` replace this file with the production version.
 User-agent: *
-Allow: /
-
-Sitemap: https://kulana121-bit.github.io/coffee-nation-hisar/v5/sitemap.xml
-# Run: SITE_URL=https://your-final-domain.com npm run configure
+Disallow: /
