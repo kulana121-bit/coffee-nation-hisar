@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Coffee Nation mark</title>
+  <g fill="none" stroke="#c9a86a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14c4 3 0 7 4 10" stroke-width="3"/>
+    <path d="M31 12c4 4 0 8 4 12" stroke-width="3"/>
+    <path d="M42 14c4 3 0 7 4 10" stroke-width="3"/>
+    <path d="M13 29h34v13c0 8-6 14-14 14h-6c-8 0-14-6-14-14V29Z" stroke-width="3"/>
+    <path d="M47 33h4a7 7 0 0 1 0 14h-4" stroke-width="3"/>
+    <path d="M16 50h31" stroke-width="3"/>
+  </g>
+</svg>

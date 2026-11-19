@@ -1,0 +1,14 @@
+{
+  "name": "Coffee Nation Hisar",
+  "short_name": "Coffee Nation",
+  "description": "Coffee and books in PLA Market, Hisar.",
+  "start_url": "/coffee-nation-hisar/v5/",
+  "scope": "/coffee-nation-hisar/v5/",
+  "display": "standalone",
+  "background_color": "#f4ecdf",
+  "theme_color": "#2b1b14",
+  "icons": [
+    { "src": "/coffee-nation-hisar/v5/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/coffee-nation-hisar/v5/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

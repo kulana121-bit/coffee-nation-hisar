@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kulana121-bit.github.io/coffee-nation-hisar/v5/sitemap.xml
+# Run: SITE_URL=https://your-final-domain.com npm run configure
